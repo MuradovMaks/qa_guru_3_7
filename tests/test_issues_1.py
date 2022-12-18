@@ -5,6 +5,7 @@ from selene import be
 import allure
 from allure_commons.types import Severity
 
+
 @allure.tag('Search Issues(Selene)')
 @allure.label("owner", "MuradovMaks")
 @allure.epic('WEB')
@@ -12,7 +13,6 @@ from allure_commons.types import Severity
 @allure.feature('Поиск issues в репозитории Selene')
 @allure.story('Проверка,что пользователь может найти конкретный номер issues')
 @allure.severity(severity_level=Severity.CRITICAL)
-
 def test_github_issues_selene():
     browser.config.window_height = 1920
     browser.config.window_width = 1620
@@ -25,7 +25,6 @@ def test_github_issues_selene():
     browser.element(by.partial_text('#6')).should(be.visible)
 
     browser.quit()
-
 
 
 @allure.tag('Search Issues(lambda)')
@@ -55,9 +54,6 @@ def test_github_issues_lambda():
         browser.quit()
 
 
-
-
-
 @allure.tag('Search Issues(decorator)')
 @allure.label("owner", "MuradovMaks")
 @allure.epic('WEB')
@@ -68,7 +64,7 @@ def test_github_issues_lambda():
 def test_selene_decorator():
     open_github('https://github.com/')
     search_repository('MuradovMaks/qa_hm_3_3')
-    search_issues_with_repository('MuradovMaks/qa_hm_3_3','#6')
+    search_issues_with_repository('MuradovMaks/qa_hm_3_3', '#6')
     quit_this_browser()
 
 
@@ -77,6 +73,7 @@ def open_github(url):
     browser.config.window_height = 1920
     browser.config.window_width = 1620
     browser.open(url)
+
 
 @allure.step('Клик на поиск и ввод репозитория')
 def search_repository(repo):
@@ -90,7 +87,8 @@ def search_issues_with_repository(repo, number):
     browser.element(by.link_text(repo)).click()
     browser.element('#issues-tab').click()
     browser.element(by.partial_text(number)).should(be.visible)
+
+
 @allure.step('Закрытие браузера')
 def quit_this_browser():
     browser.quit()
-
